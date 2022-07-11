@@ -1,0 +1,48 @@
+1.2 Asymmetries in Price to Earnings
+
+This folder contains code to simulate and estimate Section 1.2, aka Breuer and Windisch (2019). Section 1.2 first illustrates how to simulate the model and generate the asymmetry of earnings on return – the shape found in Basu (1997). The next step is to estimate two parameters (ϑ0 and ψ0 ) using a simulated dataset.
+
+Part I. Simulation
+
+Simulate_wrapper.m 
+
+This file is the main file to simulate the model. The values of the seven parameters are define in this m file according to Section 1.2 in the survey. One can change it according to Table 1 in BW 2019. This m file calls Setup.m, valuefunctioniteration.m, Simulate.m, and Basu_regression – four parts.
+
+Setup.m
+
+This file sets up the grids for capital k and production shocks z, and also calls tauchen function to create z probability matrix. 
+
+Tauchen.m
+
+This file uses Tauchen (1986) method to grid shocks z and returns a transition matrix Prob(z’|z). 
+
+Valuefunctioniteration.m
+
+This file uses iterates value function until it converges to locate the optimal investment policy – stored as variable policy, and the corresponding value function V_new. Both policy and V_new are matrices with dimension z_num x k_num. policyij represents the optimal capital K’ for given z in z_grid(i) and k in k_grid(j), and V_newij represents the maximum Value by choosing K’ for given z in z_grid(i) and k in k_grid(j).
+
+Simulate.m 
+
+This file uses the value function V_new and optimal policy function policy to simulate time-series datasets including xxxx
+
+Basu_regression
+
+This file creates variables using the simulated datasets and run regression of Equation (1.14) in the survey. 
+
+Figure3
+
+This file plots the asymmetry in earnings-to-price as in Figure 3.
+
+Part II. Estimation
+
+Estimate_wrapper.m
+
+This file is the main file that wraps up the codes to estimate two parameters (ϑ0 and ψ0 ) according to Section 1.2. The file first simulates the data using ϑ0=.33 and ψ0 =.5 to generate data moments, aka Basu regression coefficients. Then we call Setup file, bootstrap to create variance covariance function using the data, and use fminsearch to find the parameters that minimize the SMM equation.
+
+bootstrap.m
+
+bootstrap files simulate 500 datasets using the optimal policy function and obtain Basu coefficients. We obtain variance-covariance matrix using the 500 coefficient sets, denoted as W.
+
+objective.m
+
+This file takes a given parameter set (ϑ0 and ψ0 ), find the optimal policy function using valuefunctioniteration, and simulate dataset to get Basu moments, and finally calculate SMM value.  
+ 
