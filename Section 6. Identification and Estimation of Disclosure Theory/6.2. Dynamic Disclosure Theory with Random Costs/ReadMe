@@ -1,0 +1,3 @@
+1.	Data preparation.
+
+The estimation requires data on management forecast and realized earnings. The actual data preparation can be found on Appendix C in the paper. The final dataset “data.csv” used in the estimation should contain four columns: Firm ID, Year ID, Management Forecast (Missing is treated as empty), and Realized Earnings. 
