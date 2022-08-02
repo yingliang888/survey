@@ -1,3 +1,13 @@
+6.2 Dynamic Disclosure Theory with Random Costs
+
+This section estimates the main model in Bertomeu, Marinovic, and Ma (2020). 
+
 1.	Data preparation.
 
 The estimation requires data on management forecast and realized earnings. The actual data preparation can be found on Appendix C in the paper. The final dataset “data.csv” used in the estimation should contain four columns: Firm ID, Year ID, Management Forecast (Missing is treated as empty), and Realized Earnings. 
+
+2.	Estimation.
+
+Wrapper.m: this is the main file in the estimation. The file calls in data, define likelihood function, and looks for the optimal sets of estimates.
+Getpnd.m: this function calculates the threshold of firm value of which managers are indifferent between disclose and not disclose, using Equation 6.11 in the survey. 
+Lik.m: this function calculates the loglikelihood given parameter values, using Equations 6.12 – 6.15. 
