@@ -1,0 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Section 5.2 Semi-parametric Identification with Additive cost of
+%%%%%%%% Effort, by Bertomeu, Liang, and Marinovic%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+clear; clc;
+% Load data. [gvkey year compensation abnormal stock return];
+gvkey = data(:,1);
+year = data(:,2);
+comp = data(:,3);
+ret = data(:,4);
+
+% Section 1. Semi-parametric approach
+% Step 1. kernel fit f(x|1).
+ pd = fitdist(ret,'kernel','Kernel','normal');
+ pdf1 = @(x) pdf(pd,x);   %fit f(x|1)
+ fplot(pdf1,[min(ret),max(ret)])
+ 
+%  Step 2. GMM 
+% Method 1. semi-parametric approach
+%  parameters to estimate: [gamma, beta, lambda, mu, alpha1, alpha2, nu)
+fun = @(x) obj(x,data);
+
+para_semi = particleswarm(fun,7)
+
+% Method 2. parametric approach. 
+fun2 = @(x) obj_para(x,data);
+para = particleswarm(fun,
