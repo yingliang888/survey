@@ -1,0 +1,3 @@
+Overview: this folder contains two Matlab files that use maximum likelihood estimation to replicate Section xxx. Users should prepare their own datasets that contain firm IDs, year IDs, reported earnings surprises, and corresponding stock returns.  
+•	Wrapper.m: This file stores imports data from a csv file, estimate the earnings-response function using smoothing spline, and calls estimate_likelihood function to estimate parameters using MLE.   
+•	Estimate_likelihood.m: This function uses inputs as earnings, gamma1, and gamma2 as input and returns the likelihood function value. 
